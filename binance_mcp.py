@@ -52,4 +52,4 @@ def get_price_price_change(symbol: str) -> Any:
 
 
 if __name__ == "__main__":
-    mcp.run(transport="streamable-http")
+    mcp.run(transport="sse")
