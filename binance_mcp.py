@@ -52,11 +52,11 @@ def get_price_price_change(symbol: str) -> Any:
 
 
 if __name__ == "__main__":
+    # Access the MCP via the stdio protocol
+    # mcp.run(transport="stdio")
+
     # Access the MCP via the SSE protocol thourgh <<server_url>>/sse
     mcp.run(transport="sse")
 
     # Access the MCP via the Streamable HTTP protocol thourgh <<server_url>>/streamable-http
-    # mcp.run(transport="streamable-http"):
-
-    # Access the MCP via the stdio protocol
-    # mcp.run(transport="stdio")
+    # mcp.run(transport="streamable-http")
