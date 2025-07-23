@@ -8,9 +8,11 @@ mcp = FastMCP("Binance MCP", port=8897)
 
 def get_symbol_from_name(name: str) -> str:
     if name.lower() in ["bitcoin", "btc"]:
-        return "BTCUSDT"
+        return "BTC"
     elif name.lower() in ["ethereum", "eth"]:
-        return "ETHUSDT"
+        return "ETH"
+    elif name.lower() in ["solana", "sol"]:
+        return 'SOL'
     else:
         return name.upper()
 
@@ -27,15 +29,16 @@ def get_price(symbol: str) -> Any:
         Any: The current price of the crypto asset
     """
     symbol = get_symbol_from_name(symbol)
-    url = f"https://api.binance.com/api/v3/ticker/price?symbol={symbol}"
+    # url = f"https://api.binance.com/api/v3/ticker/price?symbol={symbol}"
+    url = f"https://min-api.cryptocompare.com/data/price?fsym={symbol}&tsyms=USD"
     response = requests.get(url)
     response.raise_for_status()
     return response.json()
 
-
+"""
 @mcp.tool()
 def get_price_price_change(symbol: str) -> Any:
-    """
+   
     Get the price change of the last 24 hours of a crypto asset from Binance
 
     Args:
@@ -43,20 +46,20 @@ def get_price_price_change(symbol: str) -> Any:
 
     Returns:
         Any: The price change of the crypto asset in the last 24 hours
-    """
+   
     symbol = get_symbol_from_name(symbol)
     url = f"https://data-api.binance.vision/api/v3/ticker/24hr?symbol={symbol}"
     response = requests.get(url)
     response.raise_for_status()
     return response.json()
-
+"""
 
 if __name__ == "__main__":
     # Access the MCP via the stdio protocol
     # mcp.run(transport="stdio")
 
-    # Access the MCP via the SSE protocol thourgh <<server_url>>/sse
-    mcp.run(transport="sse")
+    # Access the MCP via the SSE protmcpocol thourgh <<server_url>>/sse
+    # mcp.run(transport="sse")
 
     # Access the MCP via the Streamable HTTP protocol thourgh <<server_url>>/streamable-http
-    # mcp.run(transport="streamable-http")
+    mcp.run(transport="streamable-http")
